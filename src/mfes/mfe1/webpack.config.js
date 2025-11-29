@@ -1,11 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const hostPackage = require("./package.json");
+const hostPackage = require("../../../package.json");
 
 module.exports = {
   mode: "development",
-  entry: "./src/index.tsx",
+  entry: "./src/bootstrap.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -28,27 +28,27 @@ module.exports = {
       template: "./public/index.html",
     }),
     new ModuleFederationPlugin({
-      name: "hostApp",
+      name: "mfeApp",
       filename: "remoteEntry.js",
-      remotes: {
-        mfeApp: "mfeApp@http://localhost:3001/remoteEntry.js",
+      exposes: {
+        "./App": "./src/App",
       },
       shared: {
         react: {
           singleton: true,
-          eager: false,
+          eager: true,
           requiredVersion: hostPackage.dependencies.react,
         },
         "react-dom": {
           singleton: true,
-          eager: false,
+          eager: true,
           requiredVersion: hostPackage.dependencies["react-dom"],
         },
       },
     }),
   ],
   devServer: {
-    port: 3000, // Your desired port number
+    port: 3001,
     open: true,
     hot: true,
     historyApiFallback: true,
