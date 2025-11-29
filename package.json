@@ -3,18 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development --open"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rdhiman56/MFE-host-src-mfes.git"
+    "start": "webpack serve --mode development --open",
+    "mfe-start:start": "cd ./src/mfes/mfe1 && PORT=3001 && webpack serve --mode development --open"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rdhiman56/MFE-host-src-mfes/issues"
-  },
-  "homepage": "https://github.com/rdhiman56/MFE-host-src-mfes#readme",
   "description": "",
   "dependencies": {
     "react": "^19.2.0",
